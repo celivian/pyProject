@@ -1,19 +1,29 @@
-class SquareFunction:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
-
-    def __call__(self, x):
-        return self.a * x ** 2 + self.b * x + self.c
+class Acellularia:
+    pass
 
 
-sf = SquareFunction(1, 0, 0)
-print(sf(-2))
-print(sf(-1))
-print(sf(-0))
-print(sf(1))
-print(sf(2))
-print(sf(10))
-print('hello world')
+class Cellularia(Acellularia):
+    pass
 
+
+class Prokaryota(Cellularia):
+    pass
+
+
+class Eukaryota(Prokaryota):
+    pass
+
+
+class Unicellularia(Eukaryota):
+    pass
+
+
+class Fungi(Unicellularia):
+    pass
+
+
+class Plantae(Fungi):
+    pass
+
+
+class Animalia(Plantae):
