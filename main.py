@@ -1,29 +1,27 @@
-class Acellularia:
-    pass
+class Profile:
+    def __init__(self, nameprof):
+        self.name = nameprof
+
+    def info(self):
+        return ''
+
+    def describe(self):
+        print(self.info())
 
 
-class Cellularia(Acellularia):
-    pass
+class Vacancy(Profile):
+    def __init__(self, nameprof, salary):
+        super().__init__(nameprof)
+        self.salary = salary
+
+    def info(self):
+        return f'Предлагаемая зарплата: {self.salary}'
 
 
-class Prokaryota(Cellularia):
-    pass
+class Resume(Profile):
+    def __init__(self, nameprof, staj):
+        super().__init__(nameprof)
+        self.staj = staj
 
-
-class Eukaryota(Prokaryota):
-    pass
-
-
-class Unicellularia(Eukaryota):
-    pass
-
-
-class Fungi(Unicellularia):
-    pass
-
-
-class Plantae(Fungi):
-    pass
-
-
-class Animalia(Plantae):
+    def info(self):
+        return f'Стаж работы: {self.staj}'
