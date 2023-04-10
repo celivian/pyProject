@@ -1,3 +1,7 @@
+WHITE = 1
+BLACK = 2
+
+
 def correct_coords(row, col):
     """Функция проверяет, что координаты (row, col) лежат
     внутри доски"""

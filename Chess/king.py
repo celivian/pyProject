@@ -1,10 +1,14 @@
+WHITE = 1
+BLACK = 2
+
+
 def correct_coords(row, col):
     """Функция проверяет, что координаты (row, col) лежат
     внутри доски"""
     return 0 <= row < 8 and 0 <= col < 8
 
 
-class Knight:
+class King:
 
     def __init__(self, row, col, color):
         self.row = row
@@ -16,7 +20,7 @@ class Knight:
         self.col = col
 
     def char(self):
-        return 'N'
+        return 'K'
 
     def get_color(self):
         return self.color
@@ -26,8 +30,7 @@ class Knight:
             return False
         # Невозможно сделать ход в клетку, которая не лежит в том же ряду
         # или столбце клеток.
-        if not (abs(self.row - row) == 1 and abs(self.col - col) == 2 or abs(self.row - row) == 2 and abs(
-                self.col - col) == 1):
+        if self.row != row and self.col != col and not (abs(self.row - row) == abs(self.col - col)):
             return False
 
         return True
