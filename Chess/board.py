@@ -22,16 +22,13 @@ class Board:
                       [None, None, None, None, None, None, None, None],
                       [None, None, None, None, None, None, None, None],
                       [None, None, None, None, None, None, None, None],
-                      [Pawn(6, 0, BLACK), Pawn(6, 1, BLACK), Pawn(6, 6, BLACK), Pawn(6, 3, BLACK),
+                      [Pawn(6, 0, BLACK), Pawn(6, 1, BLACK), Pawn(6, 2, BLACK), Pawn(6, 3, BLACK),
                        Pawn(6, 4, BLACK), Pawn(6, 5, BLACK), Pawn(6, 6, BLACK), Pawn(6, 7, BLACK)],
-                       [Rook(7, 0, BLACK), Knight(7, 1, BLACK), Bishop(7, 2, BLACK), Queen(7, 3, BLACK),
+                      [Rook(7, 0, BLACK), Knight(7, 1, BLACK), Bishop(7, 2, BLACK), Queen(7, 3, BLACK),
                        King(7, 4, BLACK), Bishop(7, 5, BLACK), Knight(7, 6, BLACK), Rook(7, 7, BLACK)
                        ]]
         for row in range(8):
             self.field.append([None] * 8)
-        # Пешка белого цвета в клетке E2.
-        self.field[1][4] = Pawn(1, 4, WHITE)
-        self.field[6][7] = Rook(6, 7, BLACK)
 
     def current_player_color(self):
         return self.color
@@ -61,10 +58,17 @@ class Board:
             return False
         if piece.get_color() != self.color:
             return False
-        if not piece.can_move(row1, col1):
+        if not piece.can_move(row1, col1, self.field):
             return False
         self.field[row][col] = None  # Снять фигуру.
         self.field[row1][col1] = piece  # Поставить на новое место.
         piece.set_position(row1, col1)
         self.color = opponent(self.color)
         return True
+
+    def is_under_attack(self, row, col, color):
+        for i in self.field:
+            for j in i:
+                if j:
+                    if j.can_move(row, col, self.field) and j.get_color() == color:
+                        return True

@@ -25,12 +25,17 @@ class King:
     def get_color(self):
         return self.color
 
-    def can_move(self, row, col):
+    def can_move(self, row, col, board):
+        b = board
         if not correct_coords(row, col):
             return False
         # Невозможно сделать ход в клетку, которая не лежит в том же ряду
         # или столбце клеток.
         if self.row != row and self.col != col and not (abs(self.row - row) == abs(self.col - col)):
+            return False
+        if not abs(self.row - row) <= 1 or not abs(self.col - col) <= 1:
+            return False
+        if board[row][col]:
             return False
 
         return True
