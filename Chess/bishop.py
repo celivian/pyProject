@@ -26,8 +26,8 @@ class Bishop:
         return self.color
 
     def can_move(self, row, col, board):
-        r = row - 1
-        c = col - 1
+        r = row
+        c = col
         if not correct_coords(row, col):
             return False
         # Невозможно сделать ход в клетку, которая не лежит в том же ряду
@@ -40,6 +40,4 @@ class Bishop:
             print(board[r][c])
             r -= 1
             c -= 1
-
-
         return True
