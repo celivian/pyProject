@@ -41,18 +41,33 @@ class Queen:
             while r != self.row and c != self.col:
                 if board[r][c]:
                     return False
-                print(board[r][c])
-                r -= 1
-                c -= 1
+                if r > self.row and c > self.col:
+                    r -= 1
+                    c -= 1
+                if r > self.row and c < self.col:
+                    r -= 1
+                    c += 1
+                if r < self.row and c > self.col:
+                    r += 1
+                    c -= 1
+                if r < self.row and c < self.col:
+                    r += 1
+                    c += 1
         if self.row == row and self.col != col:
             while c != self.col:
                 if board[r][c]:
                     return False
-                c -= 1
+                if r > self.row:
+                    r -= 1
+                if r < self.row:
+                    r += 1
         if self.col == col and self.row != row:
             while r != self.row:
                 if board[r][c]:
                     return False
-                r -= 1
+                if c > self.col:
+                    c -= 1
+                if c < self.col:
+                    c += 1
 
         return True

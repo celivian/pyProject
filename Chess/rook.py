@@ -39,11 +39,17 @@ class Rook:
             while c != self.col:
                 if board[r][c]:
                     return False
-                c -= 1
+                if r > self.row:
+                    r -= 1
+                if r < self.row:
+                    r += 1
         if self.col == col:
             while r != self.row:
                 if board[r][c]:
                     return False
-                r -= 1
+                if c > self.col:
+                    c -= 1
+                if c < self.col:
+                    c += 1
 
         return True

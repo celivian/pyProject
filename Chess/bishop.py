@@ -37,7 +37,16 @@ class Bishop:
         while r != self.row and c != self.col:
             if board[r][c]:
                 return False
-            print(board[r][c])
-            r -= 1
-            c -= 1
+            if r > self.row and c > self.col:
+                r -= 1
+                c -= 1
+            if r > self.row and c < self.col:
+                r -= 1
+                c += 1
+            if r < self.row and c > self.col:
+                r += 1
+                c -= 1
+            if r < self.row and c < self.col:
+                r += 1
+                c += 1
         return True

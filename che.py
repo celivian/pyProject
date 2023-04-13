@@ -76,9 +76,18 @@ class Bishop:
         while r != self.row and c != self.col:
             if board[r][c]:
                 return False
-            print(board[r][c])
-            r -= 1
-            c -= 1
+            if r > self.row and c > self.col:
+                r -= 1
+                c -= 1
+            if r > self.row and c < self.col:
+                r -= 1
+                c += 1
+            if r < self.row and c > self.col:
+                r += 1
+                c -= 1
+            if r < self.row and c < self.col:
+                r += 1
+                c += 1
         return True
 
 
@@ -194,19 +203,34 @@ class Queen:
             while r != self.row and c != self.col:
                 if board[r][c]:
                     return False
-                print(board[r][c])
-                r -= 1
-                c -= 1
+                if r > self.row and c > self.col:
+                    r -= 1
+                    c -= 1
+                if r > self.row and c < self.col:
+                    r -= 1
+                    c += 1
+                if r < self.row and c > self.col:
+                    r += 1
+                    c -= 1
+                if r < self.row and c < self.col:
+                    r += 1
+                    c += 1
         if self.row == row and self.col != col:
             while c != self.col:
                 if board[r][c]:
                     return False
-                c -= 1
+                if r > self.row:
+                    r -= 1
+                if r < self.row:
+                    r += 1
         if self.col == col and self.row != row:
             while r != self.row:
                 if board[r][c]:
                     return False
-                r -= 1
+                if c > self.col:
+                    c -= 1
+                if c < self.col:
+                    c += 1
 
         return True
 
@@ -242,12 +266,18 @@ class Rook:
             while c != self.col:
                 if board[r][c]:
                     return False
-                c -= 1
+                if r > self.row:
+                    r -= 1
+                if r < self.row:
+                    r += 1
         if self.col == col:
             while r != self.row:
                 if board[r][c]:
                     return False
-                r -= 1
+                if c > self.col:
+                    c -= 1
+                if c < self.col:
+                    c += 1
 
         return True
 
@@ -268,8 +298,6 @@ class Board:
                       [Rook(7, 0, BLACK), Knight(7, 1, BLACK), Bishop(7, 2, BLACK), Queen(7, 3, BLACK),
                        King(7, 4, BLACK), Bishop(7, 5, BLACK), Knight(7, 6, BLACK), Rook(7, 7, BLACK)
                        ]]
-        for row in range(8):
-            self.field.append([None] * 8)
 
     def current_player_color(self):
         return self.color
@@ -301,6 +329,7 @@ class Board:
             return False
         if not piece.can_move(row1, col1, self.field):
             return False
+
         self.field[row][col] = None  # Снять фигуру.
         self.field[row1][col1] = piece  # Поставить на новое место.
         piece.set_position(row1, col1)
@@ -313,6 +342,10 @@ class Board:
                 if j:
                     if j.can_move(row, col, self.field) and j.get_color() == color:
                         return True
+
+    def __repr__(self):
+        print_board(self)
+        return ''
 
 
 def print_board(board):  # Распечатать доску в текстовом виде (см. скриншот)
