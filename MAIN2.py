@@ -1,33 +1,24 @@
-def correct_coords(row, col):
-    """Функция проверяет, что координаты (row, col) лежат
-    внутри доски"""
-    return 0 <= row < 8 and 0 <= col < 8
+def bracket_check(test_string):
+    if test_string:
+        if test_string[0] == '(' and test_string[-1] == ')' and test_string.count('(') == test_string.count(')'):
+            while test_string:
+                for i in range(len(test_string)):
+                    if test_string[i] == '(':
+                        for j in range(len(test_string[i:])):
+                            if test_string[i:][j] == ')':
+                                test = test_string
+                                test_string = test_string[i + 1:j]
+                                test_string += test[j + 1:]
+                                break
+
+                    else:
+                        if len(test_string) <= 2:
+                            break
+                        continue
+    if test_string == '()' or test_string == '':
+        print('YES')
+    else:
+        print('NO')
 
 
-class Knight:
-
-    def __init__(self, row, col, color):
-        self.row = row
-        self.col = col
-        self.color = color
-
-    def set_position(self, row, col):
-        self.row = row
-        self.col = col
-
-    def char(self):
-        return 'N'
-
-    def get_color(self):
-        return self.color
-
-    def can_move(self, row, col):
-        if not correct_coords(row, col):
-            return False
-        # Невозможно сделать ход в клетку, которая не лежит в том же ряду
-        # или столбце клеток.
-        if not (abs(self.row - row) == 1 and abs(self.col - col) == 2 or abs(self.row - row) == 2 and abs(
-                self.col - col) == 1):
-            return False
-
-        return True
+bracket_check("())(()")

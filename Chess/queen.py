@@ -35,6 +35,9 @@ class Queen:
         if self.row != row and self.col != col and not (abs(self.row - row) == abs(self.col - col)):
             return False
 
+        if board[row][col]:
+            return True
+
         if self.row != row and self.col != col:
             r = row - 1
             c = col - 1
