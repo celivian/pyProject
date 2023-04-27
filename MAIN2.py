@@ -1,24 +1,31 @@
-def bracket_check(test_string):
-    if test_string:
-        if test_string[0] == '(' and test_string[-1] == ')' and test_string.count('(') == test_string.count(')'):
-            while test_string:
-                for i in range(len(test_string)):
-                    if test_string[i] == '(':
-                        for j in range(len(test_string[i:])):
-                            if test_string[i:][j] == ')':
-                                test = test_string
-                                test_string = test_string[i + 1:j]
-                                test_string += test[j + 1:]
-                                break
+def cutting_spot(*sp):
+    sp = [*sp]
+    sl = {}
+    sl[2] = []
+    sl[3] = []
+    sl[5] = []
+    for i in range(len(sp)):
+        if len(sp[i]) % 5 == 0:
+            sl[5].append(sp[i].capitalize())
+        if len(sp[i]) % 3 == 0:
+            sl[3].append(sp[i].lower())
+        if len(sp[i]) % 2 == 0:
+            word = ''
+            for j in range(len(sp[i])):
+                if sp[i][j].isupper():
+                    word += sp[i][j].lower()
+                else:
+                    word += sp[i][j].upper()
+            sl[2].append(word)
+    sl[2].sort()
+    sl[3].sort()
+    sl[5].sort()
+    return sl
 
-                    else:
-                        if len(test_string) <= 2:
-                            break
-                        continue
-    if test_string == '()' or test_string == '':
-        print('YES')
-    else:
-        print('NO')
+
+data = ['scarf', 'Hat', 'sweAter', 'Mittens']
+print(cutting_spot(*data))
 
 
-bracket_check("())(()")
+
+
