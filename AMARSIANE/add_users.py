@@ -18,3 +18,39 @@ user.email = "scott_chief@mars.org"
 db_sess = db_session.create_session()
 db_sess.add(user)
 db_sess.commit()
+
+user = User()
+user.surname = "Bro"
+user.name = "Borov"
+user.age = 39
+user.position = "bothman"
+user.speciality = "teacher"
+user.address = "nose"
+user.email = "borov22@mars.org"
+db_sess = db_session.create_session()
+db_sess.add(user)
+db_sess.commit()
+
+user = User()
+user.surname = "Max"
+user.name = "Maxbetov"
+user.age = 19
+user.position = "cook"
+user.speciality = "boatswain"
+user.address = "tail"
+user.email = "maxes31@mars.org"
+db_sess = db_session.create_session()
+db_sess.add(user)
+db_sess.commit()
+
+user = User()
+user.surname = "Tom"
+user.name = "Haaland"
+user.age = 18
+user.position = "pilot"
+user.speciality = "flyer"
+user.address = "wing"
+user.email = "haaland1@mars.org"
+db_sess = db_session.create_session()
+db_sess.add(user)
+db_sess.commit()
