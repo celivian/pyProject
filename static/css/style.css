@@ -1,0 +1,56 @@
+h1 {
+  color: red
+}
+div#css1 {
+  background-color: #AD66D5
+}
+div#css2 {
+  background-color: #74E868
+}
+div#css3 {
+  background-color: #AD66D5
+}
+div#css4 {
+  background-color: #FFD373
+}
+div#css5 {
+  background-color: #F26D93
+}
+.h1 {
+  text-align: center
+}
+.h2 {
+  text-align: center
+}
+.col-sm {
+  background-color: #FFD373;
+  border-radius: 5px 5px 5px 5px;
+  width: 100px;
+  margin: 40px 400px 50px
+}
+input#surname {
+  margin-top: 15px
+}
+input {
+  border-radius: 5px 5px 5px 5px;
+  border-width: 1px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  width: 725px
+}
+p {
+  margin-left: 5px;
+}
+select {
+  border-radius: 5px 5px 5px 5px;
+  border-width: 1px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  width: 725px
+}
+.check {
+  text-align: left
+}
+

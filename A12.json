@@ -1,0 +1,12 @@
+{
+    "server": "127.0.0.1",
+    "port": 8080,
+    "dishes": [
+        "mushroom pie",
+        "turkey with lemon",
+        "lingonberry and carrot pudding",
+        "chicken with pineapples",
+        "herring with beetroot",
+        "carrot pancakes"
+    ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "odor": "vanilla",
+    "type": "spice",
+    "mult": 104
+  },
+  {
+    "odor": "South Ingarian almonds",
+    "type": "walnut",
+    "mult": 136
+  },
+  {
+    "odor": "ginger",
+    "type": "spice",
+    "mult": 141
+  }
+]

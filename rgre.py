@@ -1,48 +1,34 @@
-class Hanger:
-    def __init__(self, namezak, time, oddness=0):
-        self.name = namezak
-        self.time = time
-        self.odd = oddness
+# Импорт библиотеки
+import sqlite3
 
-    def time_inc(self, n):
-        self.time += n
-        self.odd += n // 2
+def arrival(data, sort=False):
 
-    def __add__(self, other):
-        return Hanger(self.name.split()[0] + other.name.split()[1], 0, (self.odd + other.odd) // 2)
+    con = sqlite3.connect("duties.db")
+    # Создание курсора
+    cur = con.cursor()
 
-    def __imod__(self, other):
-        self.odd = self.odd % other
-        return self
+    sent = f'SELECT id, city, ratio from Cities WHERE city in {tuple(data)}'
+    result = cur.execute(sent).fetchall()
+    indexs = []
+    ratios = []
+    for i in result:
+        indexs.append(i[0])
+    for i in result:
+        ratios.append(i[2])
+    sent2 = f'SELECT city_id, name, reason_id from People WHERE city_id in {tuple(indexs)}'
+    result2 = cur.execute(sent2).fetchall()
+    indexsreason = []
+    for i in result2:
+        indexsreason.append(i[2])
+    sent1 = f'SELECT id, fee from Fees WHERE id in {tuple(indexsreason)}'
+    result1 = cur.execute(sent1).fetchall()
+    print(result)
+    print(result2)
+    print(result1)
+    print(ratios)
 
-    #def __lt__(self, other):
-    #    return self < other
-#
-    #def __le__(self, other):
-    #    return self <= other
-#
-    #def __eq__(self, other):
-    #    return self == other
-#
-    #def __ne__(self, other):
-    #    return self != other
-#
-    #def __gt__(self, other):
-    #    return self > other
-#
-    #def __ge__(self, other):
-    #    return self >= other
-
-    def __str__(self):
-        return f'Hanger by name {self.name} ({self.time}, {self.odd})'
-
-    def __call__(self, *args, **kwargs):
-        return self.odd * self.time
+    con.close()
 
 
-hg = Hanger('Rual', 3)
-print(hg)
-hg.time_inc(8)
-hg %= 8
-print(hg)
-print(hg())
+data = ['Paris', 'Iconion', 'Baghdad', 'Nowhere', 'Qom']
+arrival(data, sort=True)

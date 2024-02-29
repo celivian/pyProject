@@ -5,8 +5,8 @@
 <h3>Action # {{item.id}}</h3>
 <table class="table">
   <thead>
-    <tr>
-      <th scope="col" width="40%">Title of activity</th>
+    <tr class="table-secondary">
+      <th scope="col" width="40%" >Title of activity</th>
       <th scope="col" width="15%">Team leader</th>
       <th scope="col" width="15%">Duration</th>
       <th scope="col" width="15%">List of collaborators</th>
@@ -15,13 +15,19 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">{{item.job}}</th>
-      <td>{{item.team_leader}}</td>
-      <td>{{item.work_size}}</td>
-      <td>{{item.collaborators}}</td>
-      <td>{{item.is_finished}}</td>
+      <th scope="row" class="table-success">{{item.job}}</th>
+      <td class="table-success">{{item.team_leader}}</td>
+      <td class="table-success">{{item.work_size}}</td>
+      <td class="table-success">{{item.collaborators}}</td>
+      {% if item.is_finished == True %}
+      <td class="table-success">Is finished</td>
+      {% elif item.is_finished == False %}
+      <td class="table-danger">Is not finished</td>
+      {% endif %}
+
     </tr>
   </tbody>
+</table>
 {% endfor %}
 
 {% endblock %}
