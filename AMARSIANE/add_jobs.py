@@ -9,10 +9,10 @@ db_session.global_init("./db/mars_explorer.db")
 
 job = Jobs()
 job.team_leader = 1
-job.job = 'deployment of residential modules 1 and 2'
-job.work_size = 15
-job.collaborators = '2, 3'
-job.is_finished = False
+job.job = '243rffer'
+job.work_size = 2342
+job.collaborators = '2'
+job.is_finished = True
 db_sess = db_session.create_session()
 db_sess.add(job)
 db_sess.commit()
