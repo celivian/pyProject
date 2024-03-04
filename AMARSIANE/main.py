@@ -13,12 +13,14 @@ db_session.global_init("db/mars_explorer.db")
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
-@app.route('/add_jobs',  methods=['GET', 'POST'])
+
+@app.route('/add_jobs', methods=['GET', 'POST'])
 @login_required
 def add_jobs():
     form = WorksForm()
@@ -36,15 +38,18 @@ def add_jobs():
     return render_template('add_jobs.html', title='Добавление работы',
                            form=form)
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/jobs")
 def jobs():
     db_sess = db_session.create_session()
     jobs = db_sess.query(Jobs).all()
     return render_template("jobs.html", jobs=jobs)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -59,6 +64,7 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
 
 @app.route('/logout')
 @login_required
