@@ -10,7 +10,7 @@ blueprint = flask.Blueprint(
 )
 
 
-@blueprint.route('/api/jobs/<job_id>')
+@blueprint.route('/api/jobs/<job_id>', methods=['GET'])
 def get_job(job_id):
     db_sess = db_session.create_session()
     try:
@@ -23,6 +23,17 @@ def get_job(job_id):
         return flask.jsonify(data)
     except Exception:
         return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@blueprint.route('/api/jobs/<job_id>', methods=['DELETE'])
+def del_job(job_id):
+    db_sess = db_session.create_session()
+    i = db_sess.query(Jobs).get(job_id)
+    if not i:
+        return make_response(jsonify({'error': 'Not found'}), 404)
+    db_sess.delete(i)
+    db_sess.commit()
+    return None
 
 
 @blueprint.route('/api/jobs', methods=['GET', 'POST'])
