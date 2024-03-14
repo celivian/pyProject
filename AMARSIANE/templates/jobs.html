@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Works log</h2>
+ {% if current_user.is_authenticated %}
+        <p>
+            <a class="btn btn-primary " href="/add_jobs">Добавить работу</a>
+        </p>
+{% endif %}
 {% for item in jobs %}
 <h3>Action # {{item.id}}</h3>
 <table class="table">
@@ -27,7 +32,18 @@
 
     </tr>
   </tbody>
+
 </table>
+{% if current_user.is_authenticated and current_user == item.user or current_user.id == 1 %}
+    <div>
+        <a href="/work/{{ item.id }}" class="btn btn-warning">
+            Изменить
+        </a>
+        <a href="/work_delete/{{ item.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+    </div>
+{% endif %}
 {% endfor %}
 
 {% endblock %}
