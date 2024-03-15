@@ -1,7 +1,7 @@
 from flask import make_response, jsonify
 from flask_jwt_simple import create_jwt
 
-from asperitas.users.user import User
+from Asperitas.users.user import User
 
 
 def make_resp(message, status):

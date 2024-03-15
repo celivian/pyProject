@@ -1,4 +1,4 @@
-from asperitas.users.user import User
+from Asperitas.users.user import User
 
 
 class InMemoryUsersRepo:

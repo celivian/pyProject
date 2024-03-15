@@ -3,8 +3,8 @@ from datetime import timedelta
 from flask import Flask, request, jsonify
 from flask_jwt_simple import JWTManager
 
-from asperitas.tools.misc import make_resp, check_keys, create_jwt_generate_response
-from asperitas.users.repo import InMemoryUsersRepo
+from Asperitas.tools.misc import make_resp, check_keys, create_jwt_generate_response
+from Asperitas.users.repo import InMemoryUsersRepo
 
 app = Flask(__name__)
 app.user_repo = InMemoryUsersRepo()
