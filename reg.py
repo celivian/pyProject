@@ -1,18 +1,17 @@
-import pygame
+import argparse
+import sys
 
-size1 = input()
-n = int(size1.split()[0])
-k = int(size1.split()[1])
+parser = argparse.ArgumentParser(
+    description="convert integers to decimal system")
+parser.add_argument('integers', metavar='integers', nargs='+',
+                    type=str, help='integers to be converted')
+parser.add_argument('--base', default=2, type=int,
+                    help='default numeric system')
+parser.add_argument('--log', default=sys.stdout, type=argparse.FileType('w'),
+                    help='the file where converted data should be written')
 
-sz = n * k * 2
-
-pygame.init()
-size = width, height = sz, sz
-screen = pygame.display.set_mode(size)
-color = pygame.Color(255, 255, 255)
-c = 0
-for i in range(k):
-    pygame.draw.ellipse(screen, color, (0, 0), width=k)
-while pygame.event.wait().type != pygame.QUIT:
-    pygame.display.flip()
-pygame.quit()
+args = parser.parse_args()
+print(args)
+s = " ".join(map(lambda x: str(int(x, args.base)), args.integers))
+args.log.write(s + '\n')
+args.log.close()
