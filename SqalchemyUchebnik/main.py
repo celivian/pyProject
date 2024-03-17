@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session, make_response, request, abort
+from flask import Flask, render_template, redirect, session, make_response, request, abort, jsonify
 from data.users import User
 from data.news import News
 from forms.user import RegisterForm
@@ -6,6 +6,8 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from forms.log_user import LoginForm
 from forms.news import NewsForm
 from data import db_session
+from data import db_session
+import news_api
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -101,8 +103,10 @@ def login():
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+
 def main():
     db_session.global_init("db/blogs.db")
+    app.register_blueprint(news_api.blueprint)
     app.run()
 
 @app.route("/")
@@ -145,6 +149,18 @@ def session_test():
     session['visits_count'] = visits_count + 1
     return make_response(
         f"Вы пришли на эту страницу {visits_count + 1} раз")
+
+
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 
 if __name__ == '__main__':

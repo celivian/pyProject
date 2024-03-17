@@ -33,7 +33,6 @@ def user_register():
         return make_resp(jsonify({"message": 'Duplicated user'}), 400)
     return create_jwt_generate_response(created_user)
 
-#
 #@app.route('/api/login', methods=['POST'])
 #def user_login():
 #    in_json = request.json
