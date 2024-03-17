@@ -10,7 +10,7 @@ blueprint = flask.Blueprint(
 )
 
 
-@blueprint.route('/api/jobs/<job_id>', methods=['GET'])
+@blueprint.route('/api/jobs/<job_id>', methods=["GET"])
 def get_job(job_id):
     db_sess = db_session.create_session()
     try:
@@ -25,15 +25,41 @@ def get_job(job_id):
         return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@blueprint.route('/api/jobs/<job_id>', methods=['DELETE'])
-def del_job(job_id):
+@blueprint.route('/api/jobs/<jobs_id>', methods=['DELETE', 'GET'])
+def delete_jobs(jobs_id):
     db_sess = db_session.create_session()
-    i = db_sess.query(Jobs).get(job_id)
-    if not i:
+    try:
+        jobs = db_sess.query(Jobs).get(jobs_id)
+        if not jobs:
+            return make_response(jsonify({'error': 'Not found'}), 404)
+        db_sess.delete(jobs)
+        db_sess.commit()
+        return jsonify({'success': 'OK'})
+    except Exception:
         return make_response(jsonify({'error': 'Not found'}), 404)
-    db_sess.delete(i)
-    db_sess.commit()
-    return None
+
+
+@blueprint.route('/api/jobs/<jobs_id>', methods=['GET', 'POST'])
+def edit_jobs(jobs_id):
+    db_sess = db_session.create_session()
+    try:
+        jobs = db_sess.query(Jobs).get(jobs_id)
+        if not jobs:
+            return make_response(jsonify({'error': 'Not found'}), 404)
+        elif not request.json:
+            return make_response(jsonify({'error': 'Empty request'}), 400)
+        elif not all(key in request.json for key in
+                     ['team_leader', 'job', 'work_size', 'collaborators', 'is_finished']):
+            return make_response(jsonify({'error': 'Bad request'}), 400)
+        jobs.team_leader = request.json['team_leader']
+        jobs.job = request.json['job']
+        jobs.work_size = request.json['work_size']
+        jobs.collaborators = request.json['collaborators']
+        jobs.is_finished = request.json['is_finished']
+        db_sess.commit()
+        return jsonify({'success': 'OK'})
+    except Exception:
+        return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 @blueprint.route('/api/jobs', methods=['GET', 'POST'])
