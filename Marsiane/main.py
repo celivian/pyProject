@@ -147,21 +147,20 @@ def edit_work(id):
                            form=form
                            )
 
+
 @app.route('/work_delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def work_delete(id):
     db_sess = db_session.create_session()
     works = db_sess.query(Jobs).filter(Jobs.id == id,
-                                      (Jobs.team_leader == current_user.id) | (current_user.id == 1)
-                                      ).first()
+                                       (Jobs.team_leader == current_user.id) | (current_user.id == 1)
+                                       ).first()
     if works:
         db_sess.delete(works)
         db_sess.commit()
     else:
         abort(404)
     return redirect('/')
-
-
 
 
 if __name__ == '__main__':
